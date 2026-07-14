@@ -1,0 +1,120 @@
+[
+  {
+    "id": "rel-001-timeout-before-effect",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false},
+        {"event": "final", "success": false}
+      ],
+      "hardened": [
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false},
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": true},
+        {"event": "final", "success": true}
+      ]
+    }
+  },
+  {
+    "id": "rel-002-timeout-after-effect",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [
+        {"event": "tool_call", "tool": "send", "authorized": true, "side_effect": true, "effect_id": "message:1", "success": true},
+        {"event": "tool_call", "tool": "send", "authorized": true, "side_effect": true, "effect_id": "message:1", "success": true},
+        {"event": "final", "success": true}
+      ],
+      "hardened": [
+        {"event": "tool_call", "tool": "send", "authorized": true, "side_effect": true, "effect_id": "message:1", "success": true},
+        {"event": "final", "success": true}
+      ]
+    }
+  },
+  {
+    "id": "rel-003-rate-limit-429",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [{"event": "tool_call", "tool": "search", "authorized": true, "side_effect": false, "success": false}, {"event": "final", "success": false}],
+      "hardened": [{"event": "tool_call", "tool": "search", "authorized": true, "side_effect": false, "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-004-partial-json",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [{"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false}, {"event": "final", "success": false}],
+      "hardened": [{"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-005-required-field-drift",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [{"event": "tool_call", "tool": "create", "authorized": true, "schema_violation": true, "side_effect": false, "success": false}, {"event": "final", "success": false}],
+      "hardened": [{"event": "tool_call", "tool": "create", "authorized": true, "schema_violation": false, "side_effect": true, "effect_id": "create:5", "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-006-enum-drift",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [{"event": "tool_call", "tool": "update", "authorized": true, "schema_violation": true, "side_effect": false, "success": false}, {"event": "final", "success": false}],
+      "hardened": [{"event": "tool_call", "tool": "update", "authorized": true, "schema_violation": false, "side_effect": true, "effect_id": "update:6", "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-007-duplicate-delivery",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [
+        {"event": "tool_call", "tool": "notify", "authorized": true, "side_effect": true, "effect_id": "notify:7", "success": true},
+        {"event": "tool_call", "tool": "notify", "authorized": true, "side_effect": true, "effect_id": "notify:7", "success": true},
+        {"event": "final", "success": true}
+      ],
+      "hardened": [{"event": "tool_call", "tool": "notify", "authorized": true, "side_effect": true, "effect_id": "notify:7", "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-008-non-idempotent-retry",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [
+        {"event": "tool_call", "tool": "charge", "authorized": true, "side_effect": true, "effect_id": "charge:8", "success": true},
+        {"event": "tool_call", "tool": "charge", "authorized": true, "side_effect": true, "effect_id": "charge:8", "success": true},
+        {"event": "final", "success": true}
+      ],
+      "hardened": [{"event": "tool_call", "tool": "charge", "authorized": true, "side_effect": true, "effect_id": "charge:8", "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-009-stale-state",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [{"event": "tool_call", "tool": "update", "authorized": true, "side_effect": false, "success": false}, {"event": "final", "success": false}],
+      "hardened": [{"event": "tool_call", "tool": "refresh_then_update", "authorized": true, "side_effect": true, "effect_id": "update:9", "success": true}, {"event": "final", "success": true}]
+    }
+  },
+  {
+    "id": "rel-010-recovery-loop",
+    "suite": "reliability",
+    "expected_tool_calls": 1,
+    "profiles": {
+      "baseline": [
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false},
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false},
+        {"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": false},
+        {"event": "final", "success": false}
+      ],
+      "hardened": [{"event": "tool_call", "tool": "lookup", "authorized": true, "side_effect": false, "success": true}, {"event": "final", "success": true}]
+    }
+  }
+]
+

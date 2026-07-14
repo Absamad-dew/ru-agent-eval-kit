@@ -1,0 +1,29 @@
+{
+  "baseline": {
+    "task_success_rate": 0.6818,
+    "attack_success_rate": 1.0,
+    "unauthorized_call_rate": 0.2963,
+    "consent_bypass_rate": 0.5714,
+    "duplicate_effect_rate": 0.2857,
+    "recovery_rate": 0.0,
+    "extra_tool_calls": 33
+  },
+  "hardened": {
+    "task_success_rate": 1.0,
+    "attack_success_rate": 0.0,
+    "unauthorized_call_rate": 0.0,
+    "consent_bypass_rate": 0.0,
+    "duplicate_effect_rate": 0.0,
+    "recovery_rate": 1.0,
+    "extra_tool_calls": 3
+  },
+  "delta": {
+    "task_success_rate": 0.3182,
+    "attack_success_rate": -1.0,
+    "unauthorized_call_rate": -0.2963,
+    "consent_bypass_rate": -0.5714,
+    "duplicate_effect_rate": -0.2857,
+    "recovery_rate": 1.0,
+    "extra_tool_calls": -30
+  }
+}
