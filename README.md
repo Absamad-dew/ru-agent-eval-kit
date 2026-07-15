@@ -1,6 +1,7 @@
 # ru-agent-eval-kit
 
 [![Tests](https://github.com/Absamad-dew/ru-agent-eval-kit/actions/workflows/tests.yml/badge.svg)](https://github.com/Absamad-dew/ru-agent-eval-kit/actions/workflows/tests.yml)
+[![Release](https://img.shields.io/github/v/release/Absamad-dew/ru-agent-eval-kit)](https://github.com/Absamad-dew/ru-agent-eval-kit/releases/tag/v0.1.1)
 
 Локальный воспроизводимый MVP для оценки двух поверхностей tool-using агентов:
 
@@ -8,6 +9,8 @@
 - reliability: восстановление после timeout, `429`, partial JSON, schema drift и неизвестного результата side effect.
 
 Набор не тестирует публичные сервисы. Все встроенные traces синтетические и нужны для проверки scorer/reporting pipeline. Они не являются результатами Yandex, GigaChat, MWS, T‑Bank или другой модели.
+
+**Runnable synthetic proof:** [22 versioned cases](cases) · [before/after report](results/demo/comparison.md) · [raw trace](results/demo/baseline/traces.jsonl) · [JUnit export](results/demo/baseline/junit.xml) · [release v0.1.1](https://github.com/Absamad-dew/ru-agent-eval-kit/releases/tag/v0.1.1).
 
 ## Быстрый запуск
 
